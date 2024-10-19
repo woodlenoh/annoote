@@ -1,10 +1,10 @@
 "use client";
-
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { db } from "@/lib/firebaseConfig";
 import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { FiEdit, FiMoreHorizontal, FiLoader, FiArchive, FiCopy, FiTrash } from "react-icons/fi";
+import { format } from "date-fns";
 
 interface NotePageProps {
   params: {
@@ -15,30 +15,15 @@ interface NotePageProps {
 export default function NotePage({ params }: NotePageProps) {
   const { noteID } = params;
   const [noteContent, setNoteContent] = useState("");
+  const [createdAt, setCreatedAt] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [randomMessage, setRandomMessage] = useState("");
   const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const messages = [
-    "Believe in yourself, you are capable of amazing things.",
-    "Every day is a new opportunity to grow and improve.",
-    "You are stronger than you think.",
-    "Don't be afraid to be great. You have it in you.",
-    "Keep pushing forward, even when it's tough.",
-    "Success is not final, failure is not fatal: It is the courage to continue that counts.",
-    "Be kind to yourself and take things one step at a time.",
-    "Your potential is endless. Go do what you were created to do.",
-  ];
-
   useEffect(() => {
-    // ランダムメッセージを選択
-    setRandomMessage(messages[Math.floor(Math.random() * messages.length)]);
-
     const fetchNote = async () => {
       try {
         const noteDoc = await getDoc(doc(db, "notes", noteID));
@@ -49,6 +34,15 @@ export default function NotePage({ params }: NotePageProps) {
 
         const noteData = noteDoc.data();
         setNoteContent(noteData?.content || "");
+
+        // 作成日を取得し、フォーマットする
+        const createdAtTimestamp = noteData?.createdAt;
+        if (createdAtTimestamp) {
+          const date = createdAtTimestamp.toDate(); // FirestoreのTimestampをDateに変換
+          setCreatedAt(format(date, "yyyy-MM-dd HH:mm:ss")); // フォーマット
+        } else {
+          setCreatedAt("Unknown");
+        }
       } catch (error) {
         console.error("Error fetching note:", error);
         router.push("/");
@@ -58,7 +52,7 @@ export default function NotePage({ params }: NotePageProps) {
     };
 
     fetchNote();
-  }, [messages, noteID, router]);
+  }, [noteID, router]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -146,7 +140,7 @@ export default function NotePage({ params }: NotePageProps) {
             {showDropdown && (
               <div
                 ref={dropdownRef}
-                className="absolute right-0 mt-2.5 w-40 bg-white border rounded-lg shadow-lg z-50"
+                className="absolute right-0 mt-1.5 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-50"
               >
                 <button
                   onClick={handleCopyURL}
@@ -169,7 +163,7 @@ export default function NotePage({ params }: NotePageProps) {
         </div>
       </div>
       <div className="my-5">
-        <p className="italic">{randomMessage}</p>
+        <p>Created: {createdAt || "Loading..."}</p>
       </div>
       <textarea
         value={noteContent}
@@ -198,7 +192,7 @@ export default function NotePage({ params }: NotePageProps) {
                 disabled={loading}
                 className="px-4 py-2 bg-red-500 text-white rounded-lg"
               >
-                {loading ? <FiLoader className="animate-spin" /> : "Delete"}
+                {loading ? <><FiLoader className="animate-spin mr-2" />Delete</> : "Delete"}
               </button>
             </div>
           </div>

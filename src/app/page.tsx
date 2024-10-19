@@ -1,6 +1,4 @@
 "use client";
-
-import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { db } from "@/lib/firebaseConfig";
@@ -53,13 +51,9 @@ export default function Home() {
   };
 
   return (
-    <div className="md:w-full md:max-w-md mx-4 md:mx-auto">
-      <div className="mt-16 mb-8 flex flex-col items-center">
-        <div className="flex items-center">
-          <div className="rounded-full bg-green-500 h-5 w-5 mr-2.5" />
-          <h1 className="text-5xl font-bold">Annote</h1>
-          <div className="rounded-full bg-green-500 h-5 w-5 ml-2.5" />
-        </div>
+    <div className="md:w-full md:max-w-md mx-4 md:mx-auto min-h-screen justify-center flex flex-col">
+      <div className="mb-8 flex flex-col items-center">
+        <h1 className="text-5xl font-bold">Annote</h1>
         <p className="mt-2">Share Your Notes Online with Ease</p>
       </div>
       <div className="flex flex-col items-center">
@@ -82,9 +76,6 @@ export default function Home() {
           </button>
         </div>
         {errorMessage && <p className="mt-4 text-red-500">{errorMessage}</p>}
-        <div>
-          <Image src="/notes.svg" alt="storyset.com" width={100} height={100} className="w-80" />
-        </div>
       </div>
     </div>
   );
