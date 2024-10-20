@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { db } from "@/lib/firebaseConfig";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { FiLoader } from "react-icons/fi";
+import Image from "next/image";
 
 export default function Home() {
   const [noteID, setNoteID] = useState("");
@@ -26,10 +27,12 @@ export default function Home() {
       return;
     }
 
+    const lowerCaseNoteID = noteID.toLowerCase(); // Convert to lowercase
+
     setLoading(true);
     setErrorMessage(""); // エラーメッセージをクリア
     try {
-      const noteRef = doc(db, "notes", noteID);
+      const noteRef = doc(db, "notes", lowerCaseNoteID);
       const noteDoc = await getDoc(noteRef);
 
       if (noteDoc.exists()) {
@@ -41,7 +44,7 @@ export default function Home() {
       await setDoc(noteRef, { content: "", createdAt: new Date() });
 
       // ノートページにリダイレクト
-      router.push(`/${noteID}`);
+      router.push(`/${lowerCaseNoteID}`);
     } catch (error) {
       console.error("Error creating note:", error);
       setErrorMessage("Failed to create the note.");
@@ -51,12 +54,13 @@ export default function Home() {
   };
 
   return (
-    <div className="md:w-full md:max-w-md mx-4 md:mx-auto min-h-screen justify-center flex flex-col">
-      <div className="mb-8 flex flex-col items-center">
-        <h1 className="text-5xl font-bold">Annote</h1>
+    <>
+    <div className="md:w-full md:max-w-md mx-4 md:mx-auto min-h-screen overflow-hidden">
+      <div className="mt-16 mb-8 flex flex-col items-center">
+        <h1 className="text-5xl font-bold">Annoote</h1>
         <p className="mt-2">Share Your Notes Online with Ease</p>
       </div>
-      <div className="flex flex-col items-center">
+      <div className="mb-8 flex flex-col items-center">
         <div className="flex items-center">
           <input
             placeholder="Enter Note ID"
@@ -77,6 +81,10 @@ export default function Home() {
         </div>
         {errorMessage && <p className="mt-4 text-red-500">{errorMessage}</p>}
       </div>
+      <div>
+        <Image src="/bear.svg" alt="passion" width={100} height={100} className="w-full select-none" />
+      </div>
     </div>
+    </>
   );
 }

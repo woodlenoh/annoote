@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Annote",
+  title: "Annoote -Share Your Notes Online with Ease",
 };
 
 export default function RootLayout({

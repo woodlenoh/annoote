@@ -183,14 +183,14 @@ export default function NotePage({ params }: NotePageProps) {
             <div className="flex justify-end mt-5">
               <button
                 onClick={() => setShowModal(false)}
-                className="px-4 py-2 bg-gray-200 rounded-lg mr-2"
+                className="px-4 py-2 bg-gray-200 rounded-lg mr-2.5 outline-none focus-visible:ring-2 focus-visible:ring-primary duration-200 flex items-center ring-offset-2"
               >
                 Cancel
               </button>
               <button
                 onClick={handleDelete}
                 disabled={loading}
-                className="px-4 py-2 bg-red-500 text-white rounded-lg"
+                className="px-4 py-2 bg-red-500 text-white rounded-lg flex items-center outline-none focus-visible:ring-2 focus-visible:ring-primary duration-200 flex items-center ring-offset-2"
               >
                 {loading ? <><FiLoader className="animate-spin mr-2" />Delete</> : "Delete"}
               </button>
