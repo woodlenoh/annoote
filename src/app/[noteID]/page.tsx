@@ -20,7 +20,7 @@ export default function NotePage({ params }: NotePageProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [showCopyModal, setShowCopyModal] = useState(false); // New state for the copy modal
+  const [showCopyModal, setShowCopyModal] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();

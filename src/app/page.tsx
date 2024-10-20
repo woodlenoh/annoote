@@ -5,6 +5,7 @@ import { db } from "@/lib/firebaseConfig";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { FiLoader } from "react-icons/fi";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   const [noteID, setNoteID] = useState("");
@@ -58,6 +59,13 @@ export default function Home() {
     <div className="md:w-full md:max-w-md mx-4 md:mx-auto overflow-hidden">
       <div className="mt-16 mb-8 flex flex-col items-center">
         <h1 className="text-5xl font-bold">Annoote</h1>
+        <div className="mt-2 flex">
+          <Link target="blank" rel="noopener noreferrer" href="/legal?tab=terms" className="outline-none hover:underline focus-visible:underline">Legal</Link>
+          <p className="mx-2">/</p>
+          <Link href="#" className="outline-none hover:underline focus-visible:underline">Contact Us</Link>
+          <p className="mx-2">/</p>
+          <Link target="blank" href="https://github.com/m1ngjp/annoote" rel="noopener noreferrer" className="outline-none hover:underline focus:underline">GitHub</Link>
+        </div>
       </div>
       <div className="mb-8 flex flex-col items-center">
         <div className="flex items-center">
@@ -81,7 +89,7 @@ export default function Home() {
         {errorMessage && <p className="mt-4 text-red-500">{errorMessage}</p>}
       </div>
       <div>
-        <Image src="/bear.svg" alt="passion" width={100} height={100} className="w-full select-none" />
+        <Image src="/bear.svg" alt="bear" width={100} height={100} className="w-full select-none" />
       </div>
     </div>
     </>
