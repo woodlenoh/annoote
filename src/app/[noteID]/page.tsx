@@ -140,7 +140,7 @@ export default function NotePage({ params }: NotePageProps) {
             {showDropdown && (
               <div
                 ref={dropdownRef}
-                className="absolute right-0 mt-1.5 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-50"
+                className="absolute right-0 mt-1.5 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-[1000]"
               >
                 <button
                   onClick={handleCopyURL}
@@ -170,7 +170,7 @@ export default function NotePage({ params }: NotePageProps) {
         onChange={(e) => setNoteContent(e.target.value)}
         disabled={!isEditing}
         className={`w-full h-64 p-5 border rounded-lg outline-none focus:ring-2 focus:ring-primary placeholder-gray-400 duration-200 shadow-inner ring-offset-2 ${
-          isEditing ? "" : "bg-gray-100"
+          isEditing ? "" : "bg-gray-50"
         }`}
         placeholder="Enter your note here..."
       />
