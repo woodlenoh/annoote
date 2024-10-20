@@ -57,8 +57,7 @@ export default function Home() {
     <>
     <div className="md:w-full md:max-w-md mx-4 md:mx-auto overflow-hidden">
       <div className="mt-16 mb-8 flex flex-col items-center">
-        <h1 className="text-5xl font-bold mb-2">Annoote</h1>
-        <p>Share Your Notes Online with Ease</p>
+        <h1 className="text-5xl font-bold">Annoote</h1>
       </div>
       <div className="mb-8 flex flex-col items-center">
         <div className="flex items-center">
