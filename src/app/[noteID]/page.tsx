@@ -140,7 +140,7 @@ export default function NotePage({ params }: NotePageProps) {
             {showDropdown && (
               <div
                 ref={dropdownRef}
-                className="absolute right-0 mt-1.5 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-[1000]"
+                className="absolute right-0 mt-1.5 w-40 bg-white border border-gray-200 rounded-lg shadow-lg dropdown"
               >
                 <button
                   onClick={handleCopyURL}

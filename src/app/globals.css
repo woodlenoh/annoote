@@ -15,3 +15,7 @@ body {
   background: var(--background);
   font-family: "Overpass", "Kiwi Maru", Arial, Helvetica, sans-serif;
 }
+
+.dropdown {
+  z-index: 1000;
+}
