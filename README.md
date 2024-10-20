@@ -10,7 +10,7 @@ Annoote lets you create, share, and edit notes effortlessly! Using a unique Note
 3. **Delete Notes:** Clean up when you're done. Remove notes with a single click. 🗑️
 
 ## How It Works 🛠️
-1. **Edit -> Save:** Make changes to the note content and hit save.
+1. **[Edit] -> [Save]:** Make changes to the note content and hit save.
 2. **Share:** Copy the URL and share it with anyone who needs access.
 3. **Delete:** Clear out notes you no longer need.
 
@@ -30,8 +30,28 @@ Annoote（アノート）は、ユニークなNote IDを使って簡単にノー
 3. **ノートの削除:** 必要がなくなったノートはワンクリックで削除できます。🗑️
 
 ## 使い方 🛠️
-1. **編集 -> 保存:** ノートの内容を編集し、保存ボタンを押します。
+1. **[Edit] -> [Save]:** ノートの内容を編集し、保存ボタンを押します。
 2. **共有:** URLをコピーして、アクセスが必要な人と共有します。
 3. **削除:** 必要のないノートは削除します。
 
 さあ、簡単にノートをオンラインで共有しましょう！🎈
+
+---
+
+# Annoote - 轻松在线共享笔记 ✨
+
+> **注意:** 由于知道URL的任何人都可以访问和编辑笔记，分享敏感信息时请谨慎。Annoote的设计初衷是快速、随意的笔记共享，而非高度安全的内容。
+
+Annoote让您轻松创建、共享和编辑笔记! 使用唯一的Note ID，任何知道URL的人都可以访问和修改笔记。非常适合快速协作、分享想法或记录重要信息。🎉
+
+## 主要功能 🚀
+1. **创建和编辑笔记:** 使用唯一的Note ID创建笔记，只需几下点击即可轻松编辑和保存更改。📝
+2. **与任何人分享:** 共享URL，任何人都可以访问并贡献到您的笔记。非常适合协作! 📢
+3. **删除笔记:** 完成后可一键删除笔记，保持内容整洁。🗑️
+
+## 如何使用 🛠️
+1. **[Edit] -> [Save]:** 更改笔记内容并点击保存。
+2. **分享:** 复制URL并与需要访问的人分享。
+3. **删除:** 清除不再需要的笔记。
+
+开始轻松地在线共享您的笔记吧! 🎈
