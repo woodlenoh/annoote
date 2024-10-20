@@ -21,6 +21,7 @@ export default function NotePage({ params }: NotePageProps) {
   const [showDropdown, setShowDropdown] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -56,15 +57,26 @@ export default function NotePage({ params }: NotePageProps) {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target as Node)
+      ) {
         setShowDropdown(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
+
+    if (showDropdown) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [showDropdown]);
 
   const handleEditOrSave = async () => {
     if (isEditing) {
@@ -132,6 +144,7 @@ export default function NotePage({ params }: NotePageProps) {
           </button>
           <div className="relative">
             <button
+              ref={buttonRef}
               onClick={() => setShowDropdown((prev) => !prev)}
               className="h-10 px-3 bg-white text-green-500 border border-green-500 flex items-center rounded-lg shadow outline-none focus-visible:ring-2 focus-visible:ring-primary duration-200 ring-offset-2 rounded-l-none"
             >
