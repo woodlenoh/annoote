@@ -1,6 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=BIZ+UDPGothic&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200..900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -14,7 +12,7 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: "Overpass", "BIZ UDPGothic", Arial, Helvetica, sans-serif;
+  font-family: "Overpass", Arial, Helvetica, sans-serif;
 }
 
 .dropdown {

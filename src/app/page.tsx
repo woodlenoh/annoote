@@ -62,7 +62,7 @@ export default function Home() {
         <div className="mt-2 flex">
           <Link target="blank" rel="noopener noreferrer" href="/legal?tab=terms" className="outline-none hover:underline focus-visible:underline">Legal</Link>
           <p className="mx-2">/</p>
-          <Link href="#" className="outline-none hover:underline focus-visible:underline">Contact Us</Link>
+          <Link rel="noopener noreferrer" href="/contact" className="outline-none hover:underline focus-visible:underline">Contact</Link>
           <p className="mx-2">/</p>
           <Link target="blank" href="https://github.com/m1ngjp/annoote" rel="noopener noreferrer" className="outline-none hover:underline focus:underline">GitHub</Link>
         </div>
