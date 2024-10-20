@@ -55,7 +55,7 @@ export default function Home() {
 
   return (
     <>
-    <div className="md:w-full md:max-w-md mx-4 md:mx-auto min-h-screen overflow-hidden">
+    <div className="md:w-full md:max-w-md mx-4 md:mx-auto overflow-hidden">
       <div className="mt-16 mb-8 flex flex-col items-center">
         <h1 className="text-5xl font-bold mb-2">Annoote</h1>
         <p>Share Your Notes Online with Ease</p>
