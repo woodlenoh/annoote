@@ -20,6 +20,7 @@ export default function NotePage({ params }: NotePageProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showCopyModal, setShowCopyModal] = useState(false); // New state for the copy modal
   const dropdownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
@@ -36,11 +37,11 @@ export default function NotePage({ params }: NotePageProps) {
         const noteData = noteDoc.data();
         setNoteContent(noteData?.content || "");
 
-        // 作成日を取得し、フォーマットする
+        // Get and format the creation date
         const createdAtTimestamp = noteData?.createdAt;
         if (createdAtTimestamp) {
-          const date = createdAtTimestamp.toDate(); // FirestoreのTimestampをDateに変換
-          setCreatedAt(format(date, "yyyy-MM-dd HH:mm:ss")); // フォーマット
+          const date = createdAtTimestamp.toDate(); // Convert Firestore Timestamp to Date
+          setCreatedAt(format(date, "yyyy-MM-dd HH:mm:ss")); // Format
         } else {
           setCreatedAt("Unknown");
         }
@@ -97,7 +98,7 @@ export default function NotePage({ params }: NotePageProps) {
 
   const handleCopyURL = () => {
     navigator.clipboard.writeText(window.location.href).then(
-      () => alert("URL copied to clipboard!"),
+      () => setShowCopyModal(true), // Show the copy modal instead of alert
       () => alert("Failed to copy URL.")
     );
     setShowDropdown(false);
@@ -188,6 +189,7 @@ export default function NotePage({ params }: NotePageProps) {
         placeholder="Enter your note here..."
       />
 
+      {/* Delete Confirmation Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-5 rounded-lg shadow-lg w-80 mx-4 md:mx-0">
@@ -206,6 +208,23 @@ export default function NotePage({ params }: NotePageProps) {
                 className="px-4 py-2 bg-red-500 text-white rounded-lg flex items-center outline-none focus-visible:ring-2 focus-visible:ring-primary duration-200 flex items-center ring-offset-2"
               >
                 {loading ? <><FiLoader className="animate-spin mr-2" />Delete</> : "Delete"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showCopyModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-5 rounded-lg shadow-lg w-80 mx-4 md:mx-0">
+            <h2 className="text-xl font-bold mb-5">Copy URL</h2>
+            <p>URL copied to clipboard!</p>
+            <div className="flex justify-end mt-5">
+              <button
+                onClick={() => setShowCopyModal(false)}
+                className="px-4 py-2 bg-green-500 text-white rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-primary duration-200 flex items-center ring-offset-2"
+              >
+                OK
               </button>
             </div>
           </div>
