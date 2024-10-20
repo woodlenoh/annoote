@@ -169,7 +169,7 @@ export default function NotePage({ params }: NotePageProps) {
         value={noteContent}
         onChange={(e) => setNoteContent(e.target.value)}
         disabled={!isEditing}
-        className={`w-full h-64 p-5 border rounded-lg outline-none focus:ring-2 focus:ring-primary placeholder-gray-400 duration-200 shadow-inner ring-offset-2 ${
+        className={`z-10 w-full h-64 p-5 border rounded-lg outline-none focus:ring-2 focus:ring-primary placeholder-gray-400 duration-200 shadow-inner ring-offset-2 ${
           isEditing ? "" : "bg-gray-50"
         }`}
         placeholder="Enter your note here..."
