@@ -59,13 +59,13 @@ export default function Home() {
     <>
     <div className="md:w-3/4 mx-4 md:mx-auto">
       <div className="py-4 flex items-center">
-        <div>
+        <Link href="/">
           <Image src="/logo.svg" alt="logo" width={100} height={100} className="w-8" />
-        </div>
+        </Link>
         <div className="ml-auto flex items-center space-x-4">
-          <Link href="#">Link1</Link>
-          <Link href="#">Link1</Link>
-          <Link href="#" className="bg-secondary text-white px-4 py-2 rounded-full flex items-center shadow outline-none focus-visible:ring-2 focus-visible:ring-primary duration-200 ring-offset-2"><FaEnvelope className="mr-2" />Contact</Link>
+          <Link href="#">About</Link>
+          <Link href="#">GitHub</Link>
+          <Link href="#" className="bg-secondary text-white px-4 py-2 rounded-full flex items-center outline-none focus-visible:ring-2 focus-visible:ring-primary duration-200 ring-offset-2"><FaEnvelope className="mr-2" />Contact</Link>
         </div>
       </div>
       <div className="mt-8 md:mt-0 grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -95,7 +95,7 @@ export default function Home() {
           </div>
         </div>
         <div>
-          <Image src="/bear.svg" alt="bear" width={100} height={100} className="w-full select-none" />
+          <Image src="/bear.svg" alt="bear" width={100} height={100} className="w-full select-none" draggable="false" />
         </div>
       </div>
       <div className="my-8 text-center">
