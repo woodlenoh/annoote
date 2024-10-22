@@ -5,6 +5,7 @@ import { db } from "@/lib/firebaseConfig";
 import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { FiEdit, FiMoreHorizontal, FiLoader, FiArchive, FiCopy, FiTrash } from "react-icons/fi";
 import { format } from "date-fns";
+import { marked } from "marked";
 
 interface NotePageProps {
   params: {
@@ -37,11 +38,10 @@ export default function NotePage({ params }: NotePageProps) {
         const noteData = noteDoc.data();
         setNoteContent(noteData?.content || "");
 
-        // Get and format the creation date
         const createdAtTimestamp = noteData?.createdAt;
         if (createdAtTimestamp) {
-          const date = createdAtTimestamp.toDate(); // Convert Firestore Timestamp to Date
-          setCreatedAt(format(date, "yyyy-MM-dd HH:mm:ss")); // Format
+          const date = createdAtTimestamp.toDate();
+          setCreatedAt(format(date, "yyyy-MM-dd")); // フォーマットを変更
         } else {
           setCreatedAt("Unknown");
         }
@@ -98,7 +98,7 @@ export default function NotePage({ params }: NotePageProps) {
 
   const handleCopyURL = () => {
     navigator.clipboard.writeText(window.location.href).then(
-      () => setShowCopyModal(true), // Show the copy modal instead of alert
+      () => setShowCopyModal(true),
       () => alert("Failed to copy URL.")
     );
     setShowDropdown(false);
@@ -119,9 +119,12 @@ export default function NotePage({ params }: NotePageProps) {
   };
 
   return (
-    <div className="mb-10 md:w-full md:max-w-md mx-4 md:mx-auto">
-      <div className="flex items-center bg-white sticky top-0 py-5">
-        <h1 className="text-2xl font-bold">{noteID}</h1>
+    <div className="md:w-full md:max-w-md mx-4 md:mx-auto">
+      <div className="flex items-center bg-white sticky top-0 py-4">
+        <div className="flex flex-col">
+          <h1 className="text-2xl font-bold">{noteID}</h1>
+          <p className="text-sm opacity-25 select-none">{createdAt || "Loading..."}</p>
+        </div>
         <div className="ml-auto flex items-center relative">
           <button
             onClick={handleEditOrSave}
@@ -176,20 +179,21 @@ export default function NotePage({ params }: NotePageProps) {
           </div>
         </div>
       </div>
-      <div className="my-5">
-        <p>Created: {createdAt || "Loading..."}</p>
-      </div>
-      <textarea
-        value={noteContent}
-        onChange={(e) => setNoteContent(e.target.value)}
-        disabled={!isEditing}
-        className={`w-full h-64 p-5 border rounded-lg outline-none focus:ring-2 focus:ring-primary placeholder-gray-400 duration-200 shadow-inner ring-offset-2 ${
-          isEditing ? "" : "opacity-100"
-        }`}
-        placeholder="Enter your note here..."
-      />
+      {isEditing ? (
+        <textarea
+          value={noteContent}
+          onChange={(e) => setNoteContent(e.target.value)}
+          className="w-full h-80 p-5 border rounded-lg outline-none focus:ring-2 focus:ring-primary placeholder-gray-400 duration-200 shadow-inner ring-offset-2"
+          placeholder="Enter your note here..."
+        />
+      ) : (
+        <div
+          className="prose md space-y-5"
+          dangerouslySetInnerHTML={{ __html: marked(noteContent) }}
+        />
+      )}
 
-      {/* Delete Confirmation Modal */}
+      {/* 削除確認モーダル */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-5 rounded-lg shadow-lg w-80 mx-4 md:mx-0">
@@ -198,16 +202,16 @@ export default function NotePage({ params }: NotePageProps) {
             <div className="flex justify-end mt-5">
               <button
                 onClick={() => setShowModal(false)}
-                className="px-4 py-2 bg-gray-200 rounded-lg mr-2.5 outline-none focus-visible:ring-2 focus-visible:ring-primary duration-200 flex items-center ring-offset-2"
+                className="px-4 py-2 bg-gray-200 rounded-lg mr-2.5 outline-none focus-visible:ring-2 focus-visible:ring-primary duration-200"
               >
                 Cancel
               </button>
               <button
                 onClick={handleDelete}
                 disabled={loading}
-                className="px-4 py-2 bg-red-500 text-white rounded-lg flex items-center outline-none focus-visible:ring-2 focus-visible:ring-primary duration-200 flex items-center ring-offset-2"
+                className="px-4 py-2 bg-red-500 text-white rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-primary duration-200"
               >
-                {loading ? <><FiLoader className="animate-spin mr-2" />Delete</> : "Delete"}
+                {loading ? <FiLoader className="animate-spin mr-2" /> : "Delete"}
               </button>
             </div>
           </div>
@@ -222,7 +226,7 @@ export default function NotePage({ params }: NotePageProps) {
             <div className="flex justify-end mt-5">
               <button
                 onClick={() => setShowCopyModal(false)}
-                className="px-4 py-2 bg-green-500 text-white rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-primary duration-200 flex items-center ring-offset-2"
+                className="px-4 py-2 bg-green-500 text-white rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-primary duration-200"
               >
                 OK
               </button>
@@ -230,6 +234,10 @@ export default function NotePage({ params }: NotePageProps) {
           </div>
         </div>
       )}
+
+      <div className="my-8 text-center">
+        <p>&copy; m1ngjp All Rights Reserved.</p>
+      </div>
     </div>
   );
 }
