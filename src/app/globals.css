@@ -51,24 +51,21 @@ body {
   text-decoration: underline;
 }
 .md blockquote {
-  border-left: 4px solid #ccc;
+  border-left: 4px solid #e5e7eb;
   padding-left: 1em;
-  color: #666;
-  margin: 1em 0;
+  color: #9ca3af;
   font-style: italic;
 }
 .md code {
   background-color: #f5f5f5;
-  padding: 0.2em 0.4em;
-  border-radius: 3px;
-  font-size: 0.95em;
+  padding: 2px 6px;
+  border-radius: 2px;
 }
 .md pre {
   background-color: #f5f5f5;
-  padding: 1em;
-  border-radius: 5px;
+  padding: 12px;
+  border-radius: 4px;
   overflow-x: auto;
-  font-size: 0.95em;
 }
 .md img {
   max-width: 100%;
@@ -77,5 +74,26 @@ body {
 .md hr {
   border: none;
   border-top: 1px solid rgb(229, 231, 235);
-  margin: 2em 0;
+}
+
+.text-gradient {
+  display: inline-block;
+  background: -webkit-linear-gradient(45deg, #54d0ff, #9f92ff 20%, #ff7689 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.float-up-animation {
+  animation: floatUp 0.5s ease-out forwards;
 }

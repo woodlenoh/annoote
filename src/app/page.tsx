@@ -5,8 +5,7 @@ import { db } from "@/lib/firebaseConfig";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { FiLoader } from "react-icons/fi";
 import Image from "next/image";
-import Link from "next/link";
-import { FaEnvelope } from "react-icons/fa";
+import Header from "@/components/Header";
 
 export default function Home() {
   const [noteID, setNoteID] = useState("");
@@ -58,19 +57,10 @@ export default function Home() {
   return (
     <>
     <div className="md:w-3/4 mx-4 md:mx-auto">
-      <div className="py-4 flex items-center">
-        <Link href="/">
-          <Image src="/logo.svg" alt="logo" width={100} height={100} className="w-8" />
-        </Link>
-        <div className="ml-auto flex items-center space-x-4">
-          <Link href="#">About</Link>
-          <Link href="#">GitHub</Link>
-          <Link href="#" className="bg-secondary text-white px-4 py-2 rounded-full flex items-center outline-none focus-visible:ring-2 focus-visible:ring-primary duration-200 ring-offset-2"><FaEnvelope className="mr-2" />Contact</Link>
-        </div>
-      </div>
+      <Header />
       <div className="mt-8 md:mt-0 grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="flex flex-col justify-center space-y-8">
-          <h1 className="text-5xl font-bold">Share Your Notes Online with Ease</h1>
+          <h1 className="text-5xl font-bold">Share <span className="text-gradient">Your Notes</span> Online with Ease</h1>
           <p className="text-2xl">Easy note-sharing. Create, edit, and share notes via URL. Simple idea collaboration!</p>
           <div>
             <div className="flex items-center">
@@ -95,11 +85,8 @@ export default function Home() {
           </div>
         </div>
         <div>
-          <Image src="/bear.svg" alt="bear" width={100} height={100} className="w-full select-none" draggable="false" />
+          <Image src="/bear.svg" alt="bear" width={100} height={100} className="opacity-80 w-full select-none" draggable="false" />
         </div>
-      </div>
-      <div className="my-8 text-center">
-        <p>&copy; m1ngjp All Rights Reserved.</p>
       </div>
     </div>
     </>

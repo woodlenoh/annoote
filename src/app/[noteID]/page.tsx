@@ -6,6 +6,7 @@ import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { FiEdit, FiMoreHorizontal, FiLoader, FiArchive, FiCopy, FiTrash } from "react-icons/fi";
 import { format } from "date-fns";
 import { marked } from "marked";
+import Header from "@/components/Header";
 
 interface NotePageProps {
   params: {
@@ -119,11 +120,18 @@ export default function NotePage({ params }: NotePageProps) {
   };
 
   return (
+    <>
+    <div className="md:w-3/4 mx-4 md:mx-auto">
+      <Header />
+    </div>
     <div className="md:w-full md:max-w-md mx-4 md:mx-auto">
       <div className="flex items-center bg-white sticky top-0 py-4">
-        <div className="flex flex-col">
-          <h1 className="text-2xl font-bold">{noteID}</h1>
-          <p className="text-sm opacity-25 select-none">{createdAt || "Loading..."}</p>
+        <div className="flex items-center">
+        <img src={`https://api.dicebear.com/9.x/thumbs/svg?seed=${noteID}&backgroundColor=22c55e&eyesColor=22c55e&mouthColor=22c55e&shapeColor=ffffff`} alt="thumbs" className="rounded-full border border-green-500 w-10 mr-2" />
+          <div className="flex flex-col">
+            <h1 className="text-2xl font-bold">{noteID}</h1>
+            <p className="text-sm opacity-25 select-none">{createdAt || "Loading..."}</p>
+          </div>
         </div>
         <div className="ml-auto flex items-center relative">
           <button
@@ -183,12 +191,12 @@ export default function NotePage({ params }: NotePageProps) {
         <textarea
           value={noteContent}
           onChange={(e) => setNoteContent(e.target.value)}
-          className="w-full h-80 p-5 border rounded-lg outline-none focus:ring-2 focus:ring-primary placeholder-gray-400 duration-200 shadow-inner ring-offset-2"
+          className="w-full h-80 p-5 border rounded-lg outline-none shadow-inner"
           placeholder="Enter your note here..."
         />
       ) : (
         <div
-          className="prose md space-y-5"
+          className="prose md space-y-5 mt-4 float-up-animation"
           dangerouslySetInnerHTML={{ __html: marked(noteContent) }}
         />
       )}
@@ -234,10 +242,7 @@ export default function NotePage({ params }: NotePageProps) {
           </div>
         </div>
       )}
-
-      <div className="my-8 text-center">
-        <p>&copy; m1ngjp All Rights Reserved.</p>
-      </div>
     </div>
+    </>
   );
 }
