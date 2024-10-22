@@ -6,6 +6,7 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { FiLoader } from "react-icons/fi";
 import Image from "next/image";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const [noteID, setNoteID] = useState("");
@@ -88,6 +89,7 @@ export default function Home() {
           <Image src="/bear.svg" alt="bear" width={100} height={100} className="opacity-80 w-full select-none" draggable="false" />
         </div>
       </div>
+      <Footer />
     </div>
     </>
   );

@@ -7,6 +7,7 @@ import { FiEdit, FiMoreHorizontal, FiLoader, FiArchive, FiCopy, FiTrash } from "
 import { format } from "date-fns";
 import { marked } from "marked";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 interface NotePageProps {
   params: {
@@ -125,7 +126,7 @@ export default function NotePage({ params }: NotePageProps) {
       <Header />
     </div>
     <div className="md:w-full md:max-w-md mx-4 md:mx-auto">
-      <div className="flex items-center bg-white sticky top-0 py-4">
+      <div className="flex items-center bg-white sticky top-0 py-4 z-50">
         <div className="flex items-center">
         <img src={`https://api.dicebear.com/9.x/thumbs/svg?seed=${noteID}&backgroundColor=22c55e&eyesColor=22c55e&mouthColor=22c55e&shapeColor=ffffff`} alt="thumbs" className="rounded-full border border-green-500 w-10 mr-2" />
           <div className="flex flex-col">
@@ -243,6 +244,7 @@ export default function NotePage({ params }: NotePageProps) {
         </div>
       )}
     </div>
+    <Footer />
     </>
   );
 }
