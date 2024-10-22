@@ -7,7 +7,6 @@ import { FiEdit, FiMoreHorizontal, FiLoader, FiArchive, FiCopy, FiTrash } from "
 import { format } from "date-fns";
 import { marked } from "marked";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 
 interface NotePageProps {
   params: {
@@ -244,7 +243,6 @@ export default function NotePage({ params }: NotePageProps) {
         </div>
       )}
     </div>
-    <Footer />
     </>
   );
 }
