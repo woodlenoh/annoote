@@ -15,7 +15,6 @@ export default function Home() {
   const router = useRouter();
 
   const handleGoToNote = async () => {
-    // バリデーション
     if (!noteID) {
       setErrorMessage("Please enter a Note ID.");
       return;
@@ -29,10 +28,10 @@ export default function Home() {
       return;
     }
 
-    const lowerCaseNoteID = noteID.toLowerCase(); // Convert to lowercase
+    const lowerCaseNoteID = noteID.toLowerCase();
 
     setLoading(true);
-    setErrorMessage(""); // エラーメッセージをクリア
+    setErrorMessage("");
     try {
       const noteRef = doc(db, "notes", lowerCaseNoteID);
       const noteDoc = await getDoc(noteRef);
@@ -42,10 +41,8 @@ export default function Home() {
         return;
       }
 
-      // ノートが存在しなければ新しいノートを作成
       await setDoc(noteRef, { content: "", createdAt: new Date() });
 
-      // ノートページにリダイレクト
       router.push(`/${lowerCaseNoteID}`);
     } catch (error) {
       console.error("Error creating note:", error);

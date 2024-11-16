@@ -6,7 +6,7 @@ import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { FiEdit, FiMoreHorizontal, FiLoader, FiArchive, FiCopy, FiTrash } from "react-icons/fi";
 import { format } from "date-fns";
 import { marked } from "marked";
-import Header from "@/components/Header";
+import { FiHelpCircle, FiMenu } from "react-icons/fi";
 
 interface NotePageProps {
   params: {
@@ -121,13 +121,15 @@ export default function NotePage({ params }: NotePageProps) {
 
   return (
     <>
-    <div className="md:w-3/4 mx-4 md:mx-auto">
-      <Header />
+    <div className="md:w-3/4 mx-4 md:mx-auto py-4 flex items-center justify-between text-2xl">
+      <FiMenu />
+      <FiHelpCircle />
     </div>
-    <div className="md:w-full md:max-w-md mx-4 md:mx-auto">
-      <div className="flex items-center bg-white sticky top-0 py-4 z-50">
+    <div className="md:w-3/4 mx-4 md:mx-auto">
+      <div className="flex items-center sticky top-0 py-4 z-50">
+        <div className="flex items-center border w-full rounded-full px-4 py-2 bg-white mx-2">
         <div className="flex items-center">
-        <img src={`https://api.dicebear.com/9.x/thumbs/svg?seed=${noteID}&backgroundColor=22c55e&eyesColor=22c55e&mouthColor=22c55e&shapeColor=ffffff`} alt="thumbs" className="rounded-full border border-green-500 w-10 mr-2" />
+        <img src={`https://api.dicebear.com/9.x/thumbs/svg?seed=${noteID}&backgroundColor=22c55e&eyesColor=22c55e&mouthColor=22c55e&shapeColor=ffffff`} alt="thumbs" className="rounded-full border border-green-500 w-10 mr-2 float-up-2-animation" />
           <div className="flex flex-col">
             <h1 className="text-2xl font-bold">{noteID}</h1>
             <p className="text-sm opacity-25 select-none">{createdAt || "Loading..."}</p>
@@ -137,7 +139,7 @@ export default function NotePage({ params }: NotePageProps) {
           <button
             onClick={handleEditOrSave}
             disabled={loading}
-            className="px-4 py-2 bg-green-500 text-white rounded-lg shadow outline-none focus-visible:ring-2 focus-visible:ring-primary duration-200 flex items-center ring-offset-2 rounded-r-none focus-visible:z-10"
+            className="px-4 py-2 bg-green-500 text-white rounded-full shadow outline-none focus-visible:ring-2 focus-visible:ring-primary duration-200 flex items-center ring-offset-2 rounded-r-none focus-visible:z-10"
           >
             {isEditing ? (
               <>
@@ -158,7 +160,7 @@ export default function NotePage({ params }: NotePageProps) {
             <button
               ref={buttonRef}
               onClick={() => setShowDropdown((prev) => !prev)}
-              className="h-10 px-3 bg-white text-green-500 border border-green-500 flex items-center rounded-lg shadow outline-none focus-visible:ring-2 focus-visible:ring-primary duration-200 ring-offset-2 rounded-l-none"
+              className="h-10 px-3 bg-white text-green-500 border border-green-500 flex items-center rounded-full shadow outline-none focus-visible:ring-2 focus-visible:ring-primary duration-200 ring-offset-2 rounded-l-none"
             >
               <FiMoreHorizontal />
             </button>
@@ -186,6 +188,7 @@ export default function NotePage({ params }: NotePageProps) {
             )}
           </div>
         </div>
+        </div>
       </div>
       {isEditing ? (
         <textarea
@@ -195,10 +198,13 @@ export default function NotePage({ params }: NotePageProps) {
           placeholder="Enter your note here..."
         />
       ) : (
-        <div
-          className="prose md space-y-5 mt-4 float-up-animation"
-          dangerouslySetInnerHTML={{ __html: marked(noteContent) }}
-        />
+        <div className="float-up-animation">
+         <div
+            className="prose md space-y-4 mt-4"
+            dangerouslySetInnerHTML={{ __html: marked(noteContent) }}
+          />
+          <p className="text-center my-4 opacity-50 select-none">This page is powered by Annoote.</p>
+        </div>
       )}
 
       {/* 削除確認モーダル */}
