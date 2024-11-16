@@ -135,11 +135,11 @@ export default function NotePage({ params }: NotePageProps) {
             <p className="text-sm opacity-25 select-none">{createdAt || "Loading..."}</p>
           </div>
         </div>
-        <div className="ml-auto flex items-center relative">
+        <div className="ml-auto flex items-center relative shadow rounded-full">
           <button
             onClick={handleEditOrSave}
             disabled={loading}
-            className="px-4 py-2 bg-green-500 text-white rounded-full shadow outline-none focus-visible:ring-2 focus-visible:ring-primary duration-200 flex items-center ring-offset-2 rounded-r-none focus-visible:z-10"
+            className="px-4 py-2 bg-green-500 text-white rounded-full outline-none focus-visible:ring-2 focus-visible:ring-primary duration-200 flex items-center ring-offset-2 rounded-r-none focus-visible:z-10"
           >
             {isEditing ? (
               <>
@@ -152,7 +152,7 @@ export default function NotePage({ params }: NotePageProps) {
               </>
             ) : (
               <>
-                <FiEdit className="mr-2" /> Edit
+                <FiEdit className="mr-2" />Edit
               </>
             )}
           </button>
@@ -160,7 +160,7 @@ export default function NotePage({ params }: NotePageProps) {
             <button
               ref={buttonRef}
               onClick={() => setShowDropdown((prev) => !prev)}
-              className="h-10 px-3 bg-white text-green-500 border border-green-500 flex items-center rounded-full shadow outline-none focus-visible:ring-2 focus-visible:ring-primary duration-200 ring-offset-2 rounded-l-none"
+              className="h-10 px-3 bg-white text-green-500 border border-green-500 flex items-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-primary duration-200 ring-offset-2 rounded-l-none"
             >
               <FiMoreHorizontal />
             </button>
