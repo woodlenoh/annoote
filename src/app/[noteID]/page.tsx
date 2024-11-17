@@ -7,6 +7,7 @@ import { FiEdit, FiMoreHorizontal, FiLoader, FiArchive, FiCopy, FiTrash } from "
 import { format } from "date-fns";
 import { marked } from "marked";
 import { FiHelpCircle, FiMenu } from "react-icons/fi";
+import Link from "next/link";
 
 interface NotePageProps {
   params: {
@@ -123,13 +124,15 @@ export default function NotePage({ params }: NotePageProps) {
     <>
     <div className="md:w-3/4 mx-4 md:mx-auto py-4 flex items-center justify-between text-2xl">
       <FiMenu />
-      <FiHelpCircle />
+      <Link href="/help">
+        <FiHelpCircle />
+      </Link>
     </div>
     <div className="md:w-3/4 mx-4 md:mx-auto">
       <div className="flex items-center sticky top-0 p-4 z-50">
         <div className="flex items-center border w-full rounded-full px-4 py-2 bg-white">
         <div className="flex items-center">
-        <img src={`https://api.dicebear.com/9.x/thumbs/svg?seed=${noteID}&backgroundColor=22c55e&eyesColor=22c55e&mouthColor=22c55e&shapeColor=ffffff`} alt="thumbs" className="rounded-full border border-green-500 w-10 mr-2 float-up-2-animation" />
+        <img src={`https://api.dicebear.com/9.x/thumbs/svg?seed=${noteID}&backgroundColor=22c55e&eyesColor=22c55e&mouthColor=22c55e&shapeColor=ffffff`} alt="thumbs" className="rounded-full border border-green-500 w-10 mr-2 float-up-2-animation select-none" />
           <div className="flex flex-col">
             <h1 className="text-2xl font-bold">{noteID}</h1>
             <p className="text-sm opacity-25 select-none">{createdAt || "Loading..."}</p>
@@ -170,19 +173,39 @@ export default function NotePage({ params }: NotePageProps) {
                 className="absolute right-0 mt-1.5 w-40 bg-white border border-gray-200 rounded-lg shadow-lg dropdown"
               >
                 <button
-                  onClick={handleCopyURL}
-                  className="w-full text-left px-4 py-3 hover:bg-gray-100 flex items-center"
+                  onClick={handleEditOrSave}
+                  disabled={loading}
+                  className="flex px-4 py-3 hover:bg-gray-100 md:hidden items-center w-full"
                 >
-                  <FiCopy className="mr-2" /> Copy URL
+                  {isEditing ? (
+                    <>
+                      {loading ? (
+                        <FiLoader className="animate-spin mr-2" />
+                      ) : (
+                        <FiArchive className="mr-2" />
+                      )}
+                      Save
+                    </>
+                  ) : (
+                    <>
+                      <FiEdit className="mr-2" />Edit
+                    </>
+                  )}
+                </button>
+                <button
+                  onClick={handleCopyURL}
+                  className="w-full px-4 py-3 hover:bg-gray-100 flex items-center"
+                >
+                  <FiCopy className="mr-2" />Copy URL
                 </button>
                 <button
                   onClick={() => {
                     setShowModal(true);
                     setShowDropdown(false);
                   }}
-                  className="w-full text-left px-4 py-3 hover:bg-gray-100 flex items-center"
+                  className="w-full px-4 py-3 hover:bg-gray-100 flex items-center"
                 >
-                  <FiTrash className="mr-2" /> Delete
+                  <FiTrash className="mr-2" />Delete
                 </button>
               </div>
             )}
