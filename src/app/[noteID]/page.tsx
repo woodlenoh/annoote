@@ -126,8 +126,8 @@ export default function NotePage({ params }: NotePageProps) {
       <FiHelpCircle />
     </div>
     <div className="md:w-3/4 mx-4 md:mx-auto">
-      <div className="flex items-center sticky top-0 py-4 z-50">
-        <div className="flex items-center border w-full rounded-full px-4 py-2 bg-white mx-2">
+      <div className="flex items-center sticky top-0 p-4 z-50">
+        <div className="flex items-center border w-full rounded-full px-4 py-2 bg-white">
         <div className="flex items-center">
         <img src={`https://api.dicebear.com/9.x/thumbs/svg?seed=${noteID}&backgroundColor=22c55e&eyesColor=22c55e&mouthColor=22c55e&shapeColor=ffffff`} alt="thumbs" className="rounded-full border border-green-500 w-10 mr-2 float-up-2-animation" />
           <div className="flex flex-col">
@@ -139,7 +139,7 @@ export default function NotePage({ params }: NotePageProps) {
           <button
             onClick={handleEditOrSave}
             disabled={loading}
-            className="px-4 py-2 bg-green-500 text-white rounded-full outline-none focus-visible:ring-2 focus-visible:ring-primary duration-200 flex items-center ring-offset-2 rounded-r-none focus-visible:z-10"
+            className="hidden  px-4 py-2 bg-green-500 text-white rounded-full outline-none focus-visible:ring-2 focus-visible:ring-primary duration-200 md:flex items-center ring-offset-2 rounded-r-none focus-visible:z-10"
           >
             {isEditing ? (
               <>
@@ -160,7 +160,7 @@ export default function NotePage({ params }: NotePageProps) {
             <button
               ref={buttonRef}
               onClick={() => setShowDropdown((prev) => !prev)}
-              className="h-10 px-3 bg-white text-green-500 border border-green-500 flex items-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-primary duration-200 ring-offset-2 rounded-l-none"
+              className="h-10 px-3 bg-white text-green-500 border border-green-500 flex items-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-primary duration-200 ring-offset-2 md:rounded-l-none"
             >
               <FiMoreHorizontal />
             </button>
