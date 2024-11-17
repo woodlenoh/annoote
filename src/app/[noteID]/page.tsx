@@ -3,10 +3,10 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { db } from "@/lib/firebaseConfig";
 import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
-import { FiEdit, FiMoreHorizontal, FiLoader, FiArchive, FiCopy, FiTrash } from "react-icons/fi";
+import { FiEdit, FiMoreHorizontal, FiLoader, FiArchive, FiCopy, FiTrash, FiUpload, FiArrowLeft } from "react-icons/fi";
 import { format } from "date-fns";
 import { marked } from "marked";
-import { FiHelpCircle, FiMenu } from "react-icons/fi";
+import { FiHelpCircle } from "react-icons/fi";
 import Link from "next/link";
 
 interface NotePageProps {
@@ -123,13 +123,15 @@ export default function NotePage({ params }: NotePageProps) {
   return (
     <>
     <div className="md:w-3/4 mx-4 md:mx-auto py-4 flex items-center justify-between text-2xl">
-      <FiMenu />
-      <Link href="/help">
+      <Link href="/" className="hover:bg-gray-100 rounded-full p-2 focus-visible:ring-2 focus-visible:ring-primary duration-200 outline-none">
+        <FiArrowLeft />
+      </Link>
+      <Link href="/help" className="hover:bg-gray-100 rounded-full p-2 focus-visible:ring-2 focus-visible:ring-primary duration-200 outline-none">
         <FiHelpCircle />
       </Link>
     </div>
     <div className="md:w-3/4 mx-4 md:mx-auto">
-      <div className="flex items-center sticky top-0 p-4 z-50">
+      <div className="flex items-center sticky top-0 py-4 px-4 z-30">
         <div className="flex items-center border w-full rounded-full px-4 py-2 bg-white">
         <div className="flex items-center">
         <img src={`https://api.dicebear.com/9.x/thumbs/svg?seed=${noteID}&backgroundColor=22c55e&eyesColor=22c55e&mouthColor=22c55e&shapeColor=ffffff`} alt="thumbs" className="rounded-full border border-green-500 w-10 mr-2 float-up-2-animation select-none" />
@@ -192,6 +194,17 @@ export default function NotePage({ params }: NotePageProps) {
                     </>
                   )}
                 </button>
+                {isEditing && (
+                  <button
+                    className="flex px-4 py-3 hover:bg-gray-100 items-center w-full"
+                  >
+                    <FiUpload className="mr-2" />
+                    Upload Image
+                  </button>
+                )}
+                {isEditing &&(
+                  <hr />
+                )}
                 <button
                   onClick={handleCopyURL}
                   className="w-full px-4 py-3 hover:bg-gray-100 flex items-center"
@@ -226,13 +239,12 @@ export default function NotePage({ params }: NotePageProps) {
             className="prose md space-y-4 mt-4"
             dangerouslySetInnerHTML={{ __html: marked(noteContent) }}
           />
-          <p className="text-center my-4 opacity-50 select-none">This page is powered by Annoote.</p>
         </div>
       )}
-
+      <p className="text-center py-4 opacity-50 select-none">This page is powered by Annoote.</p>
       {/* 削除確認モーダル */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-40">
           <div className="bg-white p-5 rounded-lg shadow-lg w-80 mx-4 md:mx-0">
             <h2 className="text-xl font-bold mb-5">Delete Note</h2>
             <p>Are you sure you want to delete this note?</p>
@@ -256,7 +268,7 @@ export default function NotePage({ params }: NotePageProps) {
       )}
 
       {showCopyModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-40">
           <div className="bg-white p-5 rounded-lg shadow-lg w-80 mx-4 md:mx-0">
             <h2 className="text-xl font-bold mb-5">Copy URL</h2>
             <p>URL copied to clipboard!</p>
